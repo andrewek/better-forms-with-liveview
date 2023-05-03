@@ -55,4 +55,46 @@ defmodule BetterForms.DataCase do
       end)
     end)
   end
+
+  @doc """
+  This helper makes life just a little easier when setting up test datetimes
+
+  Invoke like so:
+
+      time_from_now([months: 19, minutes: 7])
+      time_from_now([days: -3])
+      time_from_now([hours: 12, minutes: 2])
+
+  These will give you (respectively:
+
+  + 19 months and 7 minutes into the future from now
+  + 3 days ago
+  + 12 hours from now, minus 2 minutes (or 11 hours, 58 minutes)
+  """
+  def time_from_now(attrs) do
+    Timex.now()
+    |> Timex.shift(attrs)
+  end
+
+  @doc """
+  This helper makes life just a little easier when setting up test dates
+
+  Invoke like so:
+
+      date_from_now([months: 19, minutes: 7])
+      date_from_now([days: -3])
+      date_from_now([hours: 12, minutes: 2])
+
+  These will give you (respectively:
+
+  + 19 months and 7 minutes into the future from now
+  + 3 days ago
+  + 12 hours from now, minus 2 minutes (or 11 hours, 58 minutes)
+
+  Except all will come back as a date rather than a DateTime.
+  """
+  def date_from_now(attrs) do
+    time_from_now(attrs)
+    |> Timex.to_date()
+  end
 end

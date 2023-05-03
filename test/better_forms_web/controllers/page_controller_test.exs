@@ -1,5 +1,5 @@
 defmodule BetterFormsWeb.PageControllerTest do
-  use BetterFormsWeb.ConnCase
+  use BetterFormsWeb.ConnCase, async: true
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")
