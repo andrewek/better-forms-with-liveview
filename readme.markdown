@@ -3,6 +3,10 @@
 This repository supports the "Better Forms with LiveView" conference talk at Gig
 City Elixir 2023 (by Andrew Ek).
 
+## Tests
+
+You can run tests with `mix test` or `mix test.watch`.
+
 ## Installation and Running
 
 To start your Phoenix server:
