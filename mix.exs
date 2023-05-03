@@ -48,6 +48,7 @@ defmodule BetterForms.MixProject do
       {:phoenix_live_view, "~> 0.18.16"},
       {:plug_cowboy, "~> 2.5"},
       {:postgrex, ">= 0.0.0"},
+      {:sobelow, "~> 0.12", only: [:dev, :test], runtime: false},
       {:swoosh, "~> 1.3"},
       {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 0.6"},

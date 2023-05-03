@@ -11,6 +11,8 @@ You can run tests with `mix test` or `mix test.watch`.
 
 You can run `mix credo` to get lint output. It's pretty nice.
 
+You can also get Sobelow output with `mix sobelow`.
+
 ## Installation and Running
 
 To start your Phoenix server:
