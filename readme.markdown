@@ -7,6 +7,10 @@ City Elixir 2023 (by Andrew Ek).
 
 You can run tests with `mix test` or `mix test.watch`.
 
+## Analysis and All That
+
+You can run `mix credo` to get lint output. It's pretty nice.
+
 ## Installation and Running
 
 To start your Phoenix server:
