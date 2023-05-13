@@ -58,6 +58,7 @@ defmodule BetterForms.Invoices.Invoice do
     |> validate_required([:invoice_number])
     |> validate_number(:invoice_number, greater_than: 0)
     |> unsafe_validate_unique(:invoice_number, BetterForms.Repo)
+    |> unique_constraint(:invoice_number)
   end
 
   defp validate_recipient_email(changeset, attrs) do
