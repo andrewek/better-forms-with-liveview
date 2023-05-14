@@ -124,12 +124,6 @@ defmodule GenericRepo do
         """
         def get(queryable \\ @schema, id) do
           record = one(from(i in queryable, where: i.id == ^id))
-
-          if record do
-            {:ok, record}
-          else
-            {:error, @schema, :not_found}
-          end
         end
       end
 
