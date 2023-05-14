@@ -23,7 +23,7 @@ defmodule GenericRepo do
   There exists a `preloads` option, which should be a keyword list.
   """
 
-  @default_methods_list [:all, :one, :get, :insert, :update, :count, :destroy]
+  @default_methods_list [:all, :one, :get, :insert, :update, :count, :max, :destroy]
 
   defmacro __using__(opts \\ []) do
     schema = Keyword.get(opts, :schema)
@@ -105,7 +105,13 @@ defmodule GenericRepo do
         Combine with a sort-by to get first/last records
         """
         def one(queryable \\ @schema) do
-          Repo.one(from q in queryable, limit: 1, preload: unquote(default_preloads))
+          record = Repo.one(from q in queryable, limit: 1, preload: unquote(default_preloads))
+
+          if record do
+            {:ok, record}
+          else
+            {:error, @schema, :not_found}
+          end
         end
       end
 
@@ -124,6 +130,15 @@ defmodule GenericRepo do
           else
             {:error, @schema, :not_found}
           end
+        end
+      end
+
+      if :max in unquote(methods) do
+        @doc """
+        Given a query, find the max value of a given field
+        """
+        def max(queryable \\ @schema, field) do
+          Repo.aggregate(queryable, :max, field)
         end
       end
 
