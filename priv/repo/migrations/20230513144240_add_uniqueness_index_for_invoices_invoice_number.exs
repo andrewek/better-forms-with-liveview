@@ -6,6 +6,6 @@ defmodule BetterForms.Repo.Migrations.AddUniquenessIndexForInvoicesInvoiceNumber
 
   def change do
     drop index(:invoices, :invoice_number)
-    create unique_index(:invoices, :invoice_number, [concurrently: true])
+    create unique_index(:invoices, :invoice_number, concurrently: true)
   end
 end
