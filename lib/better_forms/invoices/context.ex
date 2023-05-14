@@ -7,6 +7,13 @@ defmodule BetterForms.Invoices.Context do
   alias BetterForms.Invoices.Repo, as: InvoiceRepo
 
   @doc """
+  Get all
+  """
+  def all() do
+    InvoiceRepo.all()
+  end
+
+  @doc """
   Get by ID
   """
   def get(id) do

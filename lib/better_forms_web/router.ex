@@ -18,12 +18,10 @@ defmodule BetterFormsWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-  end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", BetterFormsWeb do
-  #   pipe_through :api
-  # end
+    live "/invoices", InvoiceLive.Index, :index
+    live "/invoices/:id", InvoiceLive.Show, :show
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:better_forms, :dev_routes) do
