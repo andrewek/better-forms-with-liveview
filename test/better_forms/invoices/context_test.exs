@@ -19,6 +19,19 @@ defmodule BetterForms.Invoices.ContextTest do
     end
   end
 
+  describe "get/1" do
+    test "fetches it if exists" do
+      %Invoice{id: id} = insert(:invoice)
+
+      assert {:ok, %Invoice{id: ^id}} = InvoiceContext.get(id)
+    end
+
+    test "fails if it doesn't" do
+      id = Ecto.UUID.generate()
+      assert {:error, Invoice, :not_found} = InvoiceContext.get(id)
+    end
+  end
+
   describe "get_by_invoice_number/1" do
     test "fetches if it exists" do
       %Invoice{id: id, invoice_number: num} = insert(:invoice)

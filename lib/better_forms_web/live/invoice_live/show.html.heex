@@ -1,0 +1,13 @@
+<.header>
+  Invoice #<%= @invoice.invoice_number %>
+</.header>
+
+<.list>
+  <:item title="Recipient Email"><%= @invoice.recipient_email %></:item>
+  <:item title="Due On"><%= @invoice.due_on %></:item>
+  <:item title="Amount in Cents"><%= @invoice.amount_in_cents %></:item>
+  <:item title="Status"><%= @invoice.status %></:item>
+  <:item title="Description"><%= @invoice.description %></:item>
+</.list>
+
+<.back navigate={~p"/invoices"}>Back to All Invoices</.back>
