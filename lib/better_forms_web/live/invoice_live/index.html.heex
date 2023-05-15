@@ -1,11 +1,21 @@
 <.header>
   Invoices
   <:actions>
-    <.link navigate={~p"/invoices/new-1"}>New Invoice - 1</.link>
-    <.link navigate={~p"/invoices/new-2"}>New Invoice - 2</.link>
-    <.link navigate={~p"/invoices/new-3"}>New Invoice - 3</.link>
-    <.link navigate={~p"/invoices/new-4"}>New Invoice - 4</.link>
-    <.link navigate={~p"/invoices/new-5"}>New Invoice - 5</.link>
+    <.link navigate={~p"/invoices/new-1"}>
+      <.button>New - 1</.button>
+    </.link>
+    <.link navigate={~p"/invoices/new-2"}>
+      <.button>New - 2</.button>
+    </.link>
+    <.link navigate={~p"/invoices/new-3"}>
+      <.button>New - 3</.button>
+    </.link>
+    <.link navigate={~p"/invoices/new-4"}>
+      <.button>New - 4</.button>
+    </.link>
+    <.link navigate={~p"/invoices/new-5"}>
+      <.button>New - 5</.button>
+    </.link>
   </:actions>
 </.header>
 
@@ -16,5 +26,5 @@
   <:col :let={invoice} label="Number">#<%= invoice.invoice_number %></:col>
   <:col :let={invoice} label="Status"><%= invoice.status %></:col>
   <:col :let={invoice} label="Due Date"><%= invoice.due_on %></:col>
-  <:col :let={invoice} label="Show"><.link navigate={~p"/invoices/#{invoice}"}>Show</.link></:col>
+  <:col :let={invoice}><.link navigate={~p"/invoices/#{invoice}"}>Show</.link></:col>
 </.table>
