@@ -3,6 +3,7 @@ defmodule BetterForms.Invoices.Context do
   Convenience Operators
   """
 
+  alias BetterForms.Invoices.Invoice
   alias BetterForms.Invoices.Queries, as: InvoiceQueries
   alias BetterForms.Invoices.Repo, as: InvoiceRepo
 
@@ -11,6 +12,13 @@ defmodule BetterForms.Invoices.Context do
   """
   def all() do
     InvoiceRepo.all()
+  end
+
+  @doc """
+  Changeset for Creation
+  """
+  def creation_changeset(params) do
+    Invoice.create_changeset(params)
   end
 
   @doc """
@@ -41,5 +49,12 @@ defmodule BetterForms.Invoices.Context do
   """
   def recommended_invoice_number() do
     (InvoiceRepo.max(:invoice_number) || 0) + 1
+  end
+
+  @doc """
+  Possible Status Values
+  """
+  def status_options() do
+    Ecto.Enum.values(Invoice, :status)
   end
 end

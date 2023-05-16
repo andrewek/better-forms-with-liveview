@@ -20,6 +20,11 @@ defmodule BetterFormsWeb.Router do
     get "/", PageController, :home
 
     live "/invoices", InvoiceLive.Index, :index
+
+    live "/invoices/new-1", InvoiceLive.New1, :new
+    live "/invoices/new-2", InvoiceLive.New2, :new
+    live "/invoices/new-3", InvoiceLive.New3, :new
+
     live "/invoices/:id", InvoiceLive.Show, :show
   end
 

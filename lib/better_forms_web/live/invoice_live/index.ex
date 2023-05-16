@@ -8,6 +8,7 @@ defmodule BetterFormsWeb.InvoiceLive.Index do
     invoices = InvoiceContext.all()
 
     socket
+    |> assign(page_title: "Invoices")
     |> assign(invoices: invoices)
     |> then(&{:ok, &1})
   end

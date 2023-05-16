@@ -1,0 +1,51 @@
+<.header>
+  New Invoice - Variation 2
+</.header>
+
+<div class="mt-6">
+  <.form
+    :let={f}
+    for={@changeset}
+    phx-submit="save"
+  >
+    <div class="my-4">
+      <%= label f, :invoice_number %>
+      <%= number_input f, :invoice_number %>
+      <%= error_tag f, :invoice_number %>
+    </div>
+
+    <div class="my-4">
+      <%= label f, :recipient_email %>
+      <%= email_input f, :recipient_email %>
+      <%= error_tag f, :recipient_email %>
+    </div>
+
+    <div class="my-4">
+      <%= label f, :due_on %>
+      <%= date_input f, :due_on %>
+      <%= error_tag f, :due_on %>
+    </div>
+
+    <div class="my-4">
+      <%= label f, :amount_in_cents %>
+      <%= number_input f, :amount_in_cents %>
+      <%= error_tag f, :amount_in_cents %>
+    </div>
+
+    <div class="my-4">
+      <%= label f, :description %>
+      <%= text_input f, :description %>
+      <%= error_tag f, :description %>
+    </div>
+
+    <div class="my-4">
+      <%= label f, :status %>
+      <%= select f, :status, @status_options %>
+      <%= error_tag f, :status %>
+    </div>
+
+    <div class="my-4">
+      <.button phx-disable-with="Saving">Create Invoice</.button>
+    </div>
+  </.form>
+</div>
