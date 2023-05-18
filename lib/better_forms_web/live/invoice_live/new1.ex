@@ -63,12 +63,11 @@ defmodule BetterFormsWeb.InvoiceLive.New1 do
         opts |> Keyword.get(String.to_existing_atom(key), key) |> to_string()
       end)
     end)
-    |> Enum.flat_map(fn({key, errors}) ->
+    |> Enum.flat_map(fn {key, errors} ->
       Enum.map(
         errors,
-        fn(error) -> "#{humanize(key)} #{error}" |> String.capitalize()
-      end)
+        fn error -> "#{humanize(key)} #{error}" |> String.capitalize() end
+      )
     end)
   end
-
 end

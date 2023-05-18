@@ -14,6 +14,6 @@ defmodule BetterFormsWeb.InvoiceLive.Show do
 
     socket
     |> assign(:invoice, invoice)
-    |> then(& {:noreply, &1})
+    |> then(&{:noreply, &1})
   end
 end

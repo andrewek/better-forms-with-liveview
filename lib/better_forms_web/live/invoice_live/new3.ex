@@ -73,8 +73,7 @@ defmodule BetterFormsWeb.InvoiceLive.New3 do
 
   defp error_tag(form, field) do
     if error = form.errors[field] do
-      content_tag :span, translate_error(error), class: "text-red-500"
+      content_tag(:span, translate_error(error), class: "text-red-500")
     end
   end
 end
-

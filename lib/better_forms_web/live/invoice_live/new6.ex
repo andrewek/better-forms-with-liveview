@@ -70,4 +70,3 @@ defmodule BetterFormsWeb.InvoiceLive.New6 do
     |> then(&{:noreply, &1})
   end
 end
-

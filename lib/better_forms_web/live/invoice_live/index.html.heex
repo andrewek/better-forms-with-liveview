@@ -19,10 +19,7 @@
   </:actions>
 </.header>
 
-<.table
-  id="invoices"
-  rows={@invoices}
->
+<.table id="invoices" rows={@invoices}>
   <:col :let={invoice} label="Number">#<%= invoice.invoice_number %></:col>
   <:col :let={invoice} label="Status"><%= invoice.status %></:col>
   <:col :let={invoice} label="Due Date"><%= invoice.due_on %></:col>

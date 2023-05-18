@@ -11,39 +11,35 @@
 <% end %>
 
 <div class="mt-6">
-  <.form
-    :let={f}
-    for={@changeset}
-    phx-submit="save"
-  >
+  <.form :let={f} for={@changeset} phx-submit="save">
     <div class="my-4">
-      <%= label f, :invoice_number %>
-      <%= number_input f, :invoice_number %>
+      <%= label(f, :invoice_number) %>
+      <%= number_input(f, :invoice_number) %>
     </div>
 
     <div class="my-4">
-      <%= label f, :recipient_email %>
-      <%= text_input f, :recipient_email %>
+      <%= label(f, :recipient_email) %>
+      <%= text_input(f, :recipient_email) %>
     </div>
 
     <div class="my-4">
-      <%= label f, :due_on %>
-      <%= date_input f, :due_on %>
+      <%= label(f, :due_on) %>
+      <%= date_input(f, :due_on) %>
     </div>
 
     <div class="my-4">
-      <%= label f, :amount_in_cents %>
-      <%= number_input f, :amount_in_cents %>
+      <%= label(f, :amount_in_cents) %>
+      <%= number_input(f, :amount_in_cents) %>
     </div>
 
     <div class="my-4">
-      <%= label f, :description %>
-      <%= text_input f, :description %>
+      <%= label(f, :description) %>
+      <%= text_input(f, :description) %>
     </div>
 
     <div class="my-4">
-      <%= label f, :status %>
-      <%= select f, :status, @status_options %>
+      <%= label(f, :status) %>
+      <%= select(f, :status, @status_options) %>
     </div>
 
     <div class="my-4">
