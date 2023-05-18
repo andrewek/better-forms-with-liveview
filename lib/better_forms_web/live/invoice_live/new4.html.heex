@@ -1,0 +1,51 @@
+<.header>
+  New Invoice - Variation 4
+</.header>
+
+<.simple_form
+  for={@form}
+  id="invoice-form"
+  phx-change="validate"
+  phx-submit="save"
+>
+  <.input
+    field={@form[:invoice_number]}
+    label="Invoice Number"
+    type="number"
+  />
+
+  <.input
+    field={@form[:recipient_email]}
+    label="Recipient Email"
+    type="email"
+  />
+
+  <.input
+    field={@form[:due_on]}
+    label="Due On"
+    type="date"
+  />
+
+  <.input
+    field={@form[:amount_in_cents]}
+    label="Amount in Cents"
+    type="number"
+  />
+
+  <.input
+    field={@form[:description]}
+    label="Description"
+    type="textarea"
+  />
+
+  <.input
+    field={@form[:status]}
+    label="Status"
+    type="select"
+    options={@status_options}
+  />
+
+  <:actions>
+    <.button phx-disable-with="Saving..." type="submit">Create</.button>
+  </:actions>
+</.simple_form>
