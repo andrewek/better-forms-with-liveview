@@ -18,6 +18,8 @@ defmodule BetterForms.Invoices.Invoice do
     field :recipient_email, :string
     field :status, Ecto.Enum, values: [:open, :paid, :canceled], default: :open
 
+    field :amount_in_dollars, :decimal, virtual: true
+
     timestamps()
   end
 
@@ -34,11 +36,37 @@ defmodule BetterForms.Invoices.Invoice do
     |> validate_status(attrs)
   end
 
+  def create_with_dollars_changeset(attrs) do
+    %Invoice{}
+    |> validate_amount_in_dollars(attrs)
+    |> validate_description(attrs)
+    |> validate_due_on(attrs)
+    |> validate_invoice_number(attrs)
+    |> validate_recipient_email(attrs)
+    |> validate_status(attrs)
+  end
+
+  defp to_cents(amount) when is_float(amount) do
+    floor(amount * 100)
+  end
+
+  defp to_cents(_amount) do
+    0
+  end
+
   defp validate_amount_in_cents(changeset, attrs) do
     changeset
     |> cast(attrs, [:amount_in_cents])
     |> validate_required([:amount_in_cents])
     |> validate_number(:amount_in_cents, greater_than: 0)
+  end
+
+  defp validate_amount_in_dollars(changeset, attrs) do
+    changeset
+    |> cast(attrs, [:amount_in_dollars])
+    |> validate_required([:amount_in_dollars])
+    |> validate_number(:amount_in_dollars, greater_than: 0)
+    |> cast(%{amount_in_cents: to_cents(attrs[:amount_in_dollars])}, [:amount_in_cents])
   end
 
   defp validate_description(changeset, attrs) do
