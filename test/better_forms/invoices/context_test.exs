@@ -56,7 +56,7 @@ defmodule BetterForms.Invoices.ContextTest do
     end
 
     test "creates", %{invoice_attrs: attrs} do
-      changeset = Invoice.create_changeset(attrs)
+      changeset = InvoiceContext.creation_changeset(attrs)
 
       assert {:ok, %Invoice{}} = InvoiceContext.insert(changeset)
     end
@@ -65,7 +65,7 @@ defmodule BetterForms.Invoices.ContextTest do
       changeset =
         attrs
         |> Map.put(:amount_in_cents, -1)
-        |> Invoice.create_changeset()
+        |> InvoiceContext.creation_changeset()
 
       assert {:error, _changeset} = InvoiceContext.insert(changeset)
     end
@@ -83,7 +83,7 @@ defmodule BetterForms.Invoices.ContextTest do
     end
 
     test "creates", %{invoice_attrs: attrs} do
-      changeset = Invoice.create_with_dollars_changeset(attrs)
+      changeset = InvoiceContext.creation_with_dollars_changeset(attrs)
 
       assert {:ok, %Invoice{amount_in_cents: 12_345}} = InvoiceContext.insert(changeset)
     end
@@ -91,8 +91,8 @@ defmodule BetterForms.Invoices.ContextTest do
     test "returns with errors", %{invoice_attrs: attrs} do
       changeset =
         attrs
-        |> Map.put(:amount_in_cents, -1)
-        |> Invoice.create_changeset()
+        |> Map.put(:amount_in_dollars, -1)
+        |> InvoiceContext.creation_with_dollars_changeset()
 
       assert {:error, _changeset} = InvoiceContext.insert(changeset)
     end

@@ -22,6 +22,13 @@ defmodule BetterForms.Invoices.Context do
   end
 
   @doc """
+  Changeset for Creation, but with amount in dollars (as decimal)
+  """
+  def creation_with_dollars_changeset(params) do
+    Invoice.create_with_dollars_changeset(params)
+  end
+
+  @doc """
   Get by ID
   """
   def get(id) do

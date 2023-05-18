@@ -24,6 +24,10 @@ defmodule BetterFormsWeb.Router do
     live "/invoices/new-1", InvoiceLive.New1, :new
     live "/invoices/new-2", InvoiceLive.New2, :new
     live "/invoices/new-3", InvoiceLive.New3, :new
+    live "/invoices/new-4", InvoiceLive.New4, :new
+    live "/invoices/new-5", InvoiceLive.New5, :new
+    live "/invoices/new-6", InvoiceLive.New6, :new
+    live "/invoices/new-7", InvoiceLive.New7, :new
 
     live "/invoices/:id", InvoiceLive.Show, :show
   end
