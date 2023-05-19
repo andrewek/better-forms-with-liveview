@@ -140,20 +140,6 @@ We want to show errors as soon as we're sure it's an error, but not sooner.
 
 ---
 
-## Variation 1
-
-```elixir
-<%= if @changeset.action do %>
-  <ul class="text-red-500">
-    <%= for error <- full_errors_on(@changeset) do %>
-      <li><%= error %></li>
-    <% end %>
-  </ul>
-<% end %>
-```
-
----
-
 # But!
 
 ---
