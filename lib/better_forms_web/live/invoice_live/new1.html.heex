@@ -14,7 +14,7 @@
   <.form :let={f} for={@changeset} phx-submit="save">
     <div class="my-4">
       <%= label(f, :invoice_number) %>
-      <%= number_input(f, :invoice_number) %>
+      <%= text_input(f, :invoice_number) %>
     </div>
 
     <div class="my-4">
@@ -24,12 +24,12 @@
 
     <div class="my-4">
       <%= label(f, :due_on) %>
-      <%= date_input(f, :due_on) %>
+      <%= text_input(f, :due_on) %>
     </div>
 
     <div class="my-4">
       <%= label(f, :amount_in_cents) %>
-      <%= number_input(f, :amount_in_cents) %>
+      <%= text_input(f, :amount_in_cents) %>
     </div>
 
     <div class="my-4">

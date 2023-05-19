@@ -6,6 +6,7 @@ defmodule BetterFormsWeb.InvoiceLive.New1 do
 
   + Feedback not near form field
   + Feedback only on submit
+  + Not using semantic HTML inputs
   + Not using HTML attributes to control form
   """
 

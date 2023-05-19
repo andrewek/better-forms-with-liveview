@@ -122,7 +122,7 @@ We want to show errors as soon as we're sure it's an error, but not sooner.
 <.form :let={f} for={@changeset} phx-submit="save">
   <div class="my-4">
     <%= label(f, :invoice_number) %>
-    <%= number_input(f, :invoice_number) %>
+    <%= text_input(f, :invoice_number) %>
   </div>
 
   <div class="my-4">
@@ -167,6 +167,7 @@ We want to show errors as soon as we're sure it's an error, but not sooner.
 1. Validation errors are far from their fields
 2. Validation only on submit
 3. Some inputs are hard to find valid value for (e.g. invoice number)
+4. Inputs require special knowledge
 
 ---
 
@@ -189,15 +190,11 @@ We want to show errors as soon as we're sure it's an error, but not sooner.
 ## Variation 2
 
 ```elixir
-  def error_tag(form, field) do
-    if error = form.errors[field] do
-      content_tag(
-        :span,
-        translate_error(error),
-        class: "text-red-500"
-      )
-    end
-  end
+    <div class="my-4">
+      <%= label(f, :due_on) %>
+      <%= date_input(f, :due_on) %>
+      <%= error_tag(f, :due_on) %>
+    </div>
 ```
 
 ---
