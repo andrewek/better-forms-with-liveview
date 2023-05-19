@@ -21,7 +21,7 @@ defmodule BetterFormsWeb.InvoiceLive.New6 do
     form =
       %{}
       |> Map.put(:invoice_number, InvoiceContext.recommended_invoice_number())
-      |> InvoiceContext.creation_with_dollars_changeset()
+      |> changeset()
       |> to_form()
 
     status_options = InvoiceContext.status_options()
@@ -37,15 +37,15 @@ defmodule BetterFormsWeb.InvoiceLive.New6 do
   def handle_event("save", %{"invoice" => invoice_params}, socket) do
     changeset =
       invoice_params
-      |> InvoiceContext.creation_with_dollars_changeset()
+      |> changeset()
 
     result = InvoiceContext.insert(changeset)
 
     case result do
-      {:ok, %Invoice{invoice_number: number}} ->
+      {:ok, %Invoice{invoice_number: number, id: id}} ->
         socket
         |> put_flash(:success, "Created invoice ##{number}!")
-        |> push_redirect(to: ~p"/invoices")
+        |> push_redirect(to: ~p"/invoices/#{id}")
         |> then(&{:noreply, &1})
 
       {:error, changeset} ->
@@ -59,14 +59,20 @@ defmodule BetterFormsWeb.InvoiceLive.New6 do
   end
 
   def handle_event("validate", %{"invoice" => invoice_params}, socket) do
+    :timer.sleep(400)
+
     form =
       invoice_params
-      |> InvoiceContext.creation_changeset()
+      |> changeset()
       |> Map.put(:action, :validate)
       |> to_form()
 
     socket
     |> assign(form: form)
     |> then(&{:noreply, &1})
+  end
+
+  defp changeset(params) do
+    InvoiceContext.creation_with_dollars_changeset(params)
   end
 end

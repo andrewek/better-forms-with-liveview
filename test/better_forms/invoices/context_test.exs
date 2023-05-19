@@ -77,7 +77,7 @@ defmodule BetterForms.Invoices.ContextTest do
         build(:invoice)
         |> Map.from_struct()
         |> Map.drop([:__meta__, :amount_in_cents])
-        |> Map.put(:amount_in_dollars, 123.45)
+        |> Map.put(:amount_in_dollars, "773.45")
 
       %{invoice_attrs: invoice_attrs}
     end
@@ -85,7 +85,16 @@ defmodule BetterForms.Invoices.ContextTest do
     test "creates", %{invoice_attrs: attrs} do
       changeset = InvoiceContext.creation_with_dollars_changeset(attrs)
 
-      assert {:ok, %Invoice{amount_in_cents: 12_345}} = InvoiceContext.insert(changeset)
+      assert {:ok, %Invoice{amount_in_cents: 77_345}} = InvoiceContext.insert(changeset)
+    end
+
+    test "creates with decimal", %{invoice_attrs: attrs} do
+      changeset =
+        attrs
+        |> Map.put(:amount_in_dollars, "773.45")
+        |> InvoiceContext.creation_with_dollars_changeset()
+
+      assert {:ok, %Invoice{amount_in_cents: 77_345}} = InvoiceContext.insert(changeset)
     end
 
     test "returns with errors", %{invoice_attrs: attrs} do

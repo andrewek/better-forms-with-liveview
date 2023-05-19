@@ -4,6 +4,7 @@ defmodule BetterForms.Invoices.Invoice do
   use Ecto.Schema
   import Ecto.Changeset
   import Core.Utilities, only: [email_regex: 0]
+  require Decimal
 
   alias __MODULE__
 
@@ -46,12 +47,14 @@ defmodule BetterForms.Invoices.Invoice do
     |> validate_status(attrs)
   end
 
-  defp to_cents(amount) when is_float(amount) do
-    floor(amount * 100)
+  defp to_cents(amount) when is_nil(amount) do
+    0
   end
 
-  defp to_cents(_amount) do
-    0
+  defp to_cents(amount) do
+    amount
+    |> Decimal.mult(100)
+    |> Decimal.to_integer()
   end
 
   defp validate_amount_in_cents(changeset, attrs) do
@@ -66,7 +69,13 @@ defmodule BetterForms.Invoices.Invoice do
     |> cast(attrs, [:amount_in_dollars])
     |> validate_required([:amount_in_dollars])
     |> validate_number(:amount_in_dollars, greater_than: 0)
-    |> cast(%{amount_in_cents: to_cents(attrs[:amount_in_dollars])}, [:amount_in_cents])
+    |> then(
+      &cast(
+        &1,
+        %{amount_in_cents: to_cents(&1.changes[:amount_in_dollars])},
+        [:amount_in_cents]
+      )
+    )
   end
 
   defp validate_description(changeset, attrs) do

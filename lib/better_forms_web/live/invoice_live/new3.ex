@@ -39,6 +39,9 @@ defmodule BetterFormsWeb.InvoiceLive.New3 do
 
   @impl true
   def handle_event("save", %{"invoice" => invoice_params}, socket) do
+    # Simulate lag
+    :timer.sleep(2000)
+
     changeset =
       invoice_params
       |> InvoiceContext.creation_changeset()

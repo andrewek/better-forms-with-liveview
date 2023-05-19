@@ -3,7 +3,7 @@
 </.header>
 
 <div class="mt-6">
-  <.form :let={f} for={@changeset} phx-submit="save">
+  <.form :let={f} for={@changeset} id="new-form-2" phx-submit="save">
     <div class="my-4">
       <%= label(f, :invoice_number) %>
       <%= number_input(f, :invoice_number) %>
