@@ -162,6 +162,8 @@ We want to show errors as soon as we're sure it's an error, but not sooner.
 
 ---
 
+## Variation 1
+
 1. Validation errors are far from their fields
 2. Validation only on submit
 3. Some inputs are hard to find valid value for (e.g. invoice number)
@@ -223,11 +225,22 @@ We want to show errors as soon as we're sure it's an error, but not sooner.
 
 ## Variation 2
 
+```elixir
+  <.button phx-disable-with="Saving...">
+    Create Invoice
+  </.button>
+```
+
+---
+
+## Variation 2
+
 Relative to version 1, we:
 
 1. Show errors in logical spot
 2. Provide a sensible default Invoice Number value
 3. Use `email_input` (`<input type="email">`) for email address
+4. Handle slow-submit better
 
 ---
 
@@ -289,7 +302,6 @@ Relative to version 2, we:
 
 1. Show errors in real-time
 2. Handle disconnect/reconnect much more gracefully
-3. Handle slow submit more gracefully
 
 ---
 
@@ -499,6 +511,7 @@ Relative to version 4 we:
 
 1. `amount_in_cents` doesn't track with user mental model
 2. Still haven't tackled line items
+3. Email validation is *aggressive*
 
 ---
 
@@ -592,6 +605,7 @@ Relative to version 5 we:
 1. We still haven't tackled line items
 2. There are still possible latency issues
 3. Feedback is still kind of weird sometimes
+4. Invoice number validation runs on every change (we'll come back to this)
 
 ---
 
@@ -599,17 +613,10 @@ Relative to version 5 we:
 
 ```elixir
   def handle_event("validate", %{"invoice" => invoice_params}, socket) do
+    # Simulate some latency
     :timer.sleep(400)
 
-    form =
-      invoice_params
-      |> changeset()
-      |> Map.put(:action, :validate)
-      |> to_form()
-
-    socket
-    |> assign(form: form)
-    |> then(&{:noreply, &1})
+    # ... the rest of the stuff
   end
 ```
 

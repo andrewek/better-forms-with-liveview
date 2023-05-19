@@ -59,7 +59,7 @@ defmodule BetterFormsWeb.InvoiceLive.New6 do
   end
 
   def handle_event("validate", %{"invoice" => invoice_params}, socket) do
-    :timer.sleep(400)
+    # :timer.sleep(400)
 
     form =
       invoice_params
