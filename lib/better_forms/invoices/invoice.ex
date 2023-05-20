@@ -54,6 +54,7 @@ defmodule BetterForms.Invoices.Invoice do
   defp to_cents(amount) do
     amount
     |> Decimal.mult(100)
+    |> Decimal.round(0)
     |> Decimal.to_integer()
   end
 
